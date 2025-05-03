@@ -1,5 +1,5 @@
-<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="Modeling of permanent magnet synchronous motor."><title>PMSM model</title>
-<link rel=canonical href=https://kaysonho.github.io/p/pmsm-model/><link rel=stylesheet href=/scss/style.min.26c90390528387d170cbb36fe361d5dacdefd8b5e63cf0cc17b66220a4cdbbd7.css><meta property='og:title' content="PMSM model"><meta property='og:description' content="Modeling of permanent magnet synchronous motor."><meta property='og:url' content='https://kaysonho.github.io/p/pmsm-model/'><meta property='og:site_name' content='奇正'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='PMSM'><meta property='article:published_time' content='2025-04-29T00:00:00+00:00'><meta property='article:modified_time' content='2025-04-29T00:00:00+00:00'><meta name=twitter:title content="PMSM model"><meta name=twitter:description content="Modeling of permanent magnet synchronous motor."></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="Modeling of permanent magnet synchronous motor."><title>PMSM Model</title>
+<link rel=canonical href=https://kaysonho.github.io/p/pmsm-model/><link rel=stylesheet href=/scss/style.min.26c90390528387d170cbb36fe361d5dacdefd8b5e63cf0cc17b66220a4cdbbd7.css><meta property='og:title' content="PMSM Model"><meta property='og:description' content="Modeling of permanent magnet synchronous motor."><meta property='og:url' content='https://kaysonho.github.io/p/pmsm-model/'><meta property='og:site_name' content='奇正'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='PMSM'><meta property='article:published_time' content='2025-04-29T00:00:00+00:00'><meta property='article:modified_time' content='2025-04-29T00:00:00+00:00'><meta name=twitter:title content="PMSM Model"><meta name=twitter:description content="Modeling of permanent magnet synchronous motor."></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
 <span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_beb57379a253e0d2.png width=300 height=300 class=site-logo loading=lazy alt=Avatar>
 </a><span class=emoji>✨</span></figure><div class=site-meta><h1 class=site-name><a href=/>奇正</a></h1><h2 class=site-description>学无止境</h2></div></header><ol class=menu-social><li><a href=https://space.bilibili.com/1611178 target=_blank title=Bilibili rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 014-4h10a4 4 0 014 4v6a4 4 0 01-4 4H7a4 4 0 01-4-4v-6z"/><path d="M8 3l2 3"/><path d="M16 3l-2 3"/><path d="M9 13v-2"/><path d="M15 11v2"/></svg></a></li><li><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
 <span>Home</span></a></li><li><a href=/about/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
@@ -8,48 +8,48 @@
 <span>Search</span></a></li><li><a href=/links/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
 <span>Links</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
 <svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
-<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#transformation>Transformation</a><ol><li><a href=#clark--3s-2s>CLARK / 3s-2s</a></li><li><a href=#park--2s-2r>PARK / 2s-2r</a></li></ol></li><li><a href=#a-b-c><em>a-b-c</em></a><ol><li><a href=#voltage>voltage</a></li><li><a href=#flux-leakage>flux leakage</a></li></ol></li><li><a href=#α-β><em>α-β</em></a><ol><li><a href=#a-b-c-to-α-β><em>a-b-c</em> to <em>α-β</em></a></li><li><a href=#α-β-voltage><em>α-β</em> voltage</a></li><li><a href=#α-β-flux-leakage><em>α-β</em> flux leakage</a></li></ol></li><li><a href=#d-q><em>d-q</em></a><ol><li><a href=#α-β-to-d-q><em>α-β</em> to <em>d-q</em></a></li><li><a href=#d-q-voltage><em>d-q</em> voltage</a></li><li><a href=#d-q-flux-leakage><em>d-q</em> flux leakage</a></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><div class=article-title-wrapper><h2 class=article-title><a href=/p/pmsm-model/>PMSM model</a></h2><h3 class=article-subtitle>Modeling of permanent magnet synchronous motor.</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#transformation>Transformation</a><ol><li><a href=#abc-to-α-β--3s-2s><em>abc</em> to <em>α-β</em> / 3s-2s</a></li><li><a href=#α-β-to-d-q--2s-2r><em>α-β</em> to <em>d-q</em> / 2s-2r</a></li></ol></li><li><a href=#a-b-c><em>a-b-c</em></a><ol><li><a href=#voltage>Voltage</a></li><li><a href=#flux-leakage>Flux Leakage</a></li><li><a href=#torque>Torque</a></li><li><a href=#voltage-1>Voltage</a></li></ol></li><li><a href=#α-β><em>α-β</em></a><ol><li><a href=#a-b-c-to-α-β><em>a-b-c</em> to <em>α-β</em></a></li><li><a href=#α-β-voltage><em>α-β</em> Voltage</a></li><li><a href=#α-β-flux-leakage><em>α-β</em> Flux Leakage</a></li><li><a href=#α-β-torque><em>α-β</em> Torque</a></li></ol></li><li><a href=#d-q><em>d-q</em></a><ol><li><a href=#α-β-to-d-q><em>α-β</em> to <em>d-q</em></a></li><li><a href=#d-q-voltage><em>d-q</em> Voltage</a></li><li><a href=#d-q-flux-leakage><em>d-q</em> Flux Leakage</a></li><li><a href=#d-q-torque><em>d-q</em> Torque</a></li><li><a href=#rewritten-α-β-voltage>rewritten <em>α-β</em> voltage</a></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><div class=article-title-wrapper><h2 class=article-title><a href=/p/pmsm-model/>PMSM Model</a></h2><h3 class=article-subtitle>Modeling of permanent magnet synchronous motor.</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
 <time class=article-time--published>Apr 29, 2025</time></div></footer><footer class=article-category><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg>
 <a href=/categories/motor/ style=background-color:#2a9d8f;color:#fff>MOTOR</a></footer><footer class=article-tags><svg class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11 3l9 9a1.5 1.5.0 010 2l-6 6a1.5 1.5.0 01-2 0L3 11V7a4 4 0 014-4h4"/><circle cx="9" cy="9" r="2"/></svg>
-<a href=/tags/pmsm/>PMSM</a></footer></div></header><section class=article-content><h1 id=pmsm-model>PMSM model</h1><h2 id=transformation>Transformation</h2><h3 id=clark--3s-2s>CLARK / 3s-2s</h3>$$
+<a href=/tags/pmsm/>PMSM</a></footer></div></header><section class=article-content><h1 id=pmsm-model>PMSM Model</h1><h2 id=transformation>Transformation</h2><h3 id=abc-to-α-β--3s-2s><em>abc</em> to <em>α-β</em> / 3s-2s</h3>$$
 \begin{aligned}
-\begin{bmatrix} \alpha \\ \beta \\ 0 \\ \end{bmatrix} &= \frac{2}{3}
+\begin{bmatrix} f_{\alpha} \\ f_{\beta} \\ f_0 \\ \end{bmatrix} &= \frac{2}{3}
     \begin{bmatrix*}
 1 & -1/2       & -1/2        \\
      0 & \sqrt{3}/2 & -\sqrt{3}/2 \\
      1/\sqrt{2} & 1/\sqrt{2} & 1/\sqrt{2}  \\
     \end{bmatrix*}
-\begin{bmatrix} a \\ b \\ c \\ \end{bmatrix}
-= \pmb{T}_{\text{3s-2s}} \begin{bmatrix} a \\ b \\ c \\ \end{bmatrix} \\
-\begin{bmatrix} a \\ b \\ c \\ \end{bmatrix} &= \phantom{-}
+\begin{bmatrix} f_a \\ f_b \\ f_c \\ \end{bmatrix}
+= \pmb{T}_{\text{3s-2s}} \begin{bmatrix} f_a \\ f_b \\ f_c \\ \end{bmatrix} \\
+\begin{bmatrix} f_a \\ f_b \\ f_c \\ \end{bmatrix} &= \phantom{-}
     \begin{bmatrix*}
 1 & 0           & 1/\sqrt{2} \\
      -1/2 & \sqrt{3}/2  & 1/\sqrt{2} \\
      -1/2 & -\sqrt{3}/2 & 1/\sqrt{2} \\
     \end{bmatrix*}
-\begin{bmatrix} \alpha \\ \beta \\ 0 \\ \end{bmatrix}
-=\pmb{T}_{\text{3s-2s}}^{-1}\begin{bmatrix} \alpha \\ \beta \\ 0 \\ \end{bmatrix}
+\begin{bmatrix} f_{\alpha} \\ f_{\beta} \\ f_0 \\ \end{bmatrix}
+=\pmb{T}_{\text{3s-2s}}^{-1}\begin{bmatrix} f_{\alpha} \\ f_{\beta} \\ f_0 \\ \end{bmatrix}
 \end{aligned}
-$$<h3 id=park--2s-2r>PARK / 2s-2r</h3>$$
+$$<h3 id=α-β-to-d-q--2s-2r><em>α-β</em> to <em>d-q</em> / 2s-2r</h3>$$
 \begin{aligned}
-{\begin{bmatrix} d \\ q \\ \end{bmatrix}} &=
-    {\begin{bmatrix*}
-        \phantom{-}\cos\theta_e & -\sin\theta_e \\
-        \phantom{-}\sin\theta_e & \phantom{-}\cos\theta_e\\
-    \end{bmatrix*}}
-{\begin{bmatrix} \alpha \\ \beta \end{bmatrix}}
-={\pmb{T}_{\text{2s-2r}}}
-{\begin{bmatrix} \alpha \\ \beta \end{bmatrix}}\\
-{\begin{bmatrix} \alpha \\ \beta \end{bmatrix}} &=
+{\begin{bmatrix} f_d \\ f_q \\ \end{bmatrix}} &=
     {\begin{bmatrix*}
         \phantom{-}\cos\theta_e & \phantom{-}\sin\theta_e \\
       -\sin\theta_e & \phantom{-}\cos\theta_e\\
     \end{bmatrix*}}
-{\begin{bmatrix} d \\ q \end{bmatrix}} =
+{\begin{bmatrix} f_\alpha \\ f_\beta \end{bmatrix}}
+={\pmb{T}_{\text{2s-2r}}}
+{\begin{bmatrix} f_\alpha \\ f_\beta \end{bmatrix}}\\
+{\begin{bmatrix} f_\alpha \\ f_\beta \end{bmatrix}} &=
+    {\begin{bmatrix*}
+        \phantom{-}\cos\theta_e & -\sin\theta_e \\
+        \phantom{-}\sin\theta_e & \phantom{-}\cos\theta_e\\
+    \end{bmatrix*}}
+{\begin{bmatrix} f_d \\ f_q \end{bmatrix}} =
 {\pmb{T}_{\text{2s-2r}}^{-1}}
-{\begin{bmatrix} d \\ q \end{bmatrix} }
+{\begin{bmatrix} f_d \\ f_q \end{bmatrix} }
 \end{aligned}
-$$<h2 id=a-b-c><em>a-b-c</em></h2><h3 id=voltage>voltage</h3>$$
+$$<h2 id=a-b-c><em>a-b-c</em></h2><h3 id=voltage>Voltage</h3>$$
 \begin{aligned}
 {\pmb{u_s}} &= \pmb{R_s i_s}+ \frac{d}{dt} \pmb{\it{\Psi_s}}
 \end{aligned}
@@ -72,7 +72,7 @@ L_{aa} & M_{ab} & M_{ac} \\
 {\begin{bmatrix} \it{\Psi}_{fa} \\ \it{\Psi}_{fb} \\ \it{\Psi}_{fc} \\ \end{bmatrix}}
 \end{Bmatrix}} \\
 \end{aligned}
-$$<h3 id=flux-leakage>flux leakage</h3>$$
+$$<h3 id=flux-leakage>Flux Leakage</h3>$$
 \begin{aligned}
 {\pmb{\it{\Psi_s}}}={\pmb{L_s i_s}}+{\pmb{\it{\Psi_f}}}
 \end{aligned}
@@ -113,7 +113,7 @@ L_{aa} & M_{ab} & M_{ac} \\
 -M_{s0}+L_{s2}\cos(2(\theta_e+\pi/3)) & -M_{s0}+L_{s2}\cos(2(\theta_e)) &\phantom{-}L_{s0}\;+L_{s2}\cos(2(\theta_e+2\pi/3)) \\
 \end{bmatrix*}}
 \end{aligned}
-$$<h2 id=α-β><em>α-β</em></h2><h3 id=a-b-c-to-α-β><em>a-b-c</em> to <em>α-β</em></h3>$$
+$$<h3 id=torque>Torque</h3><h3 id=voltage-1>Voltage</h3><h2 id=α-β><em>α-β</em></h2><h3 id=a-b-c-to-α-β><em>a-b-c</em> to <em>α-β</em></h3>$$
 \begin{aligned}
 {\begin{bmatrix} u_a \\ u_b \\ u_c \\ \end{bmatrix}} &=
     {\begin{bmatrix} R_s & 0 & 0 \\ 0 & R_s & 0 \\ 0 & 0 & R_s \\ \end{bmatrix}}
@@ -192,35 +192,60 @@ L_{s0}+M_{s0}+3/2\;L_{s2}\cos(2(\theta_e)) & 3/2\;L_{s2}\sin(2(\theta_e)) \\
 \sin(\theta_e)
 \end{bmatrix*}}
 \end{aligned}
-$$<h3 id=α-β-voltage><em>α-β</em> voltage</h3>$$
+$$<h3 id=α-β-voltage><em>α-β</em> Voltage</h3>$$
 \begin{aligned}
 {\pmb{u_{\alpha\beta}}} &= \pmb{R_s i_{\alpha\beta}}+ \frac{d}{dt} \pmb{\it{\Psi_{\alpha\beta}}}
 \end{aligned}
 $$$$
 \begin{aligned}
-{\begin{bmatrix} u_\alpha \\ u_\beta \\ \end{bmatrix}} &=
+{\begin{bmatrix} u_\alpha \\ u_\beta \\ \end{bmatrix}}
+&=
     {\begin{bmatrix} R_s & 0\\ 0 & R_s \end{bmatrix}}
-    {\begin{bmatrix} u_\alpha \\ u_\beta \\ \end{bmatrix}} + p
+    {\begin{bmatrix} i_\alpha \\ i_\beta \\ \end{bmatrix}}
++ p
 {\begin{bmatrix*}[l]
 {\it\Psi_{\alpha}} \\
 {\it\Psi_{\beta}} \\
 \end{bmatrix*}}
 \\ &=
     {\begin{bmatrix} R_s & 0\\ 0 & R_s \end{bmatrix}}
-    {\begin{bmatrix} i_\alpha \\ i_\beta \\ \end{bmatrix}} + p
+    {\begin{bmatrix} i_\alpha \\ i_\beta \\ \end{bmatrix}}
++ p
 {\begin{Bmatrix}
 {{\begin{bmatrix}
 L_{\alpha\alpha} & M_{\alpha\beta} \\
             M_{\beta\alpha} & L_{\beta\beta}  \\
         \end{bmatrix}}}
-{\begin{bmatrix} i_{\alpha} \\ i_{\beta} \\ \end{bmatrix}} +
+{\begin{bmatrix} i_{\alpha} \\ i_{\beta} \\ \end{bmatrix}}
++
 {\begin{bmatrix*}[l]
 {\it\Psi_{f\alpha}} \\
 {\it\Psi_{f\beta}} \\
 \end{bmatrix*}}
 \end{Bmatrix}} \\
+&=
+    {\begin{bmatrix*}[r]
+       R_s+pL_{\alpha\alpha} & p M_{\alpha\beta}\\
+        p M_{\beta\alpha} & R_s +pL_{\beta\beta}
+    \end{bmatrix*}}
+{\begin{bmatrix} i_\alpha \\ i_\beta \\ \end{bmatrix}}
++
+{\omega_e{\it\Psi_f}}
+{\begin{bmatrix*}[r]
+-\sin\theta_e \\
+\cos\theta_e \\
+\end{bmatrix*}} \\
+&=
+    {\begin{bmatrix*}[c]
+       R_s+p L_d & \omega_e (L_d-L_q)\\
+        -\omega_e (L_d-L_q) & R_s +pL_d
+    \end{bmatrix*}}
+   {\begin{bmatrix} i_{\alpha} \\ i_{\beta} \\ \end{bmatrix}}
++
+{\begin{Bmatrix} (L_d-L_q)(\omega_e i_d -p i_q)+{\omega_e{\it\Psi_f}} \end{Bmatrix}}
+{\begin{bmatrix*}[r] -\sin\theta_e \\ \cos\theta_e \\ \end{bmatrix*}}
 \end{aligned}
-$$<h3 id=α-β-flux-leakage><em>α-β</em> flux leakage</h3>$$
+$$<p>Define $(L_d-L_q)(\omega_e i_d -p i_q)+{\omega_e{\it\Psi_f}}$ as extended electromotive force, EEMF.</p><h3 id=α-β-flux-leakage><em>α-β</em> Flux Leakage</h3>$$
 \begin{aligned}
 {\pmb{\it{\Psi_{\alpha\beta}}}}={\pmb{L_{\alpha\beta} i_{\alpha\beta}}}+{\pmb{\it{\Psi_{f\alpha\beta}}}}
 \end{aligned}
@@ -269,7 +294,12 @@ L_{\alpha\alpha} & M_{\alpha\beta} \\
     {\begin{bmatrix*}[r]
        \Sigma L+\Delta L\;\cos(2(\theta_e)) &          \Delta L\;\sin(2(\theta_e)) \\
 \Delta L\;\sin(2(\theta_e)) & \Sigma L-\Delta L\;\cos(2(\theta_e)) \\
-\end{bmatrix*}}
+\end{bmatrix*}} ,
+{\begin{pmatrix} \Sigma L = (L_d+L_q)/2 \\ \Delta L = (L_d-L_q)/2 \end{pmatrix}}
+\end{aligned}
+$$<h3 id=α-β-torque><em>α-β</em> Torque</h3>$$
+\begin{aligned}
+T_e=\frac{3}{2}p_n[\it\Psi_{\alpha} i_{\beta}-\it\Psi_{\beta} i_{\alpha}]
 \end{aligned}
 $$<h2 id=d-q><em>d-q</em></h2><h3 id=α-β-to-d-q><em>α-β</em> to <em>d-q</em></h3>$$
 \begin{aligned}
@@ -377,15 +407,15 @@ L_{\alpha\alpha} & M_{\alpha\beta} \\
         0 & \omega_e(L_{s0}+M_{s0}-3/2\;L_{s2}) \\
 -\omega_e(L_{s0}+M_{s0}+3/2\;L_{s2}) & 0  \\
     \end{bmatrix}}
-    {\begin{bmatrix} i_d \\ i_q \\ \end{bmatrix}} - \omega_e{\it\Psi_f}
+    {\begin{bmatrix} i_d \\ i_q \\ \end{bmatrix}} - {\omega_e{\it\Psi_f}}
 {\begin{bmatrix} 0 \\ -1 \\ \end{bmatrix}} \\ &= p
     {\begin{bmatrix} L_d & 0 \\ 0 & L_q \\ \end{bmatrix}}
     {\begin{bmatrix} i_d \\ i_q \\ \end{bmatrix}} +
-{\begin{bmatrix} 0 & -{\omega_eL_q} \\ {\omega_eL_d}  & 0 \\ \end{bmatrix}}
-    {\begin{bmatrix} i_d \\ i_q \\ \end{bmatrix}} + \omega_e{\it\Psi_f}
+{\begin{bmatrix} 0 & -{\omega_e L_q} \\ {\omega_e L_d} & 0 \\ \end{bmatrix}}
+    {\begin{bmatrix} i_d \\ i_q \\ \end{bmatrix}} + {\omega_e{\it\Psi_f}}
 {\begin{bmatrix} 0 \\ 1 \\ \end{bmatrix}}
 \end{aligned}
-$$<h3 id=d-q-voltage><em>d-q</em> voltage</h3>$$
+$$<h3 id=d-q-voltage><em>d-q</em> Voltage</h3>$$
 \begin{aligned}
 {\pmb{u_{dq}}} &= {\pmb{R_s i_{dq}}}+ {\frac{d}{dt}}{\pmb{\it{\Psi_{dq}}}}+ {\omega_e}
 {\begin{bmatrix} 0 & -1 \\ 1 & 0 \\ \end{bmatrix}}
@@ -410,11 +440,18 @@ $$$$
     {\begin{bmatrix} i_d \\ i_q \\ \end{bmatrix}} +p
 {\begin{bmatrix} L_d & 0 \\ 0  & L_q \\ \end{bmatrix}}
  {\begin{bmatrix} i_d \\ i_q \\ \end{bmatrix}} +
-{\begin{bmatrix} 0 & -{\omega_eL_q} \\ {\omega_eL_d}  & 0 \\ \end{bmatrix}}
-    {\begin{bmatrix} i_d \\ i_q \\ \end{bmatrix}} + \omega_e{\it\Psi_f}
-{\begin{bmatrix} 0 \\ 1 \\ \end{bmatrix}}
+{\begin{bmatrix} 0 & -{\omega_e L_q} \\ {\omega_e L_d} & 0 \\ \end{bmatrix}}
+    {\begin{bmatrix} i_d \\ i_q \\ \end{bmatrix}} + {\omega_e{\it\Psi_f}}
+{\begin{bmatrix} 0 \\ 1 \\ \end{bmatrix}} \\ &=
+    {\begin{bmatrix*}[r]
+       R_s+p L_d & -{\omega_e L_q} \\
+        {\omega_e L_d} & R_s+p L_q
+    \end{bmatrix*}}
+   +
+{\begin{Bmatrix} (L_d-L_q)(\omega_e i_d -p i_q)+{\omega_e{\it\Psi_f}} \end{Bmatrix}}
+{\begin{bmatrix*}[r] 0 \\ 1 \\ \end{bmatrix*}}
 \end{aligned}
-$$<h3 id=d-q-flux-leakage><em>d-q</em> flux leakage</h3>$$
+$$<h3 id=d-q-flux-leakage><em>d-q</em> Flux Leakage</h3>$$
 \begin{aligned}
 {\pmb{\it{\Psi_{dq}}}}={\pmb{L_{dq} i_{dq}}}+{\pmb{\it{\Psi_{fdq}}}}
 \end{aligned}
@@ -431,7 +468,7 @@ L_d & 0 \\
 {\begin{bmatrix*}[l]
 {i_d} \\
 {i_q} \\
-\end{bmatrix*}}+{\it\Psi_f}{\begin{bmatrix} 0 \\ 1 \\ \end{bmatrix}}
+\end{bmatrix*}}+{\it\Psi_f}{\begin{bmatrix} 1 \\ 0 \\ \end{bmatrix}}
 \end{aligned}
 $$$$
 \begin{aligned}
@@ -445,7 +482,78 @@ L_d & 0 \\
         0                   & L_{s0}+M_{s0}-3/2\;L_{s2} \\
 \end{bmatrix*}}
 \end{aligned}
-$$</section><footer class=article-footer></footer><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css integrity=sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js integrity=sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8 crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js integrity=sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05 crossorigin=anonymous defer></script><script>window.addEventListener("DOMContentLoaded",()=>{const e=document.querySelector(".main-article");renderMathInElement(e,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],ignoredClasses:["gist"]})})</script></article><footer class=site-footer><section class=copyright>&copy;
+$$<h3 id=d-q-torque><em>d-q</em> Torque</h3>$$
+\begin{aligned}
+T_e &= 3/2\; p_n[\it\Psi_d i_q-\it\Psi_q i_d] \\
+&= 3/2\; p_n[(L_d-L_q)i_d i_q+\it\Psi_f i_q]
+\end{aligned}
+$$$$
+\begin{aligned}
+T_e = \underbrace{3/2\; p_n (L_d-L_q)i_d i_q}_{\text{Reluctance torque}}
++\underbrace{3/2\; p_n \it\Psi_f i_q}_{\text{Magnet torque}}
+\end{aligned}
+$$<h3 id=rewritten-α-β-voltage>rewritten <em>α-β</em> voltage</h3>$$
+\begin{aligned}
+{\begin{bmatrix} u_d \\ u_q \end{bmatrix}}
+&=
+    {\begin{bmatrix} R_s & 0\\ 0 & R_s \end{bmatrix}}
+    {\begin{bmatrix} i_d \\ i_q \\ \end{bmatrix}}
++p
+{\begin{bmatrix} L_d & 0 \\ 0  & L_q \\ \end{bmatrix}}
+ {\begin{bmatrix} i_d \\ i_q \\ \end{bmatrix}}
++
+{\begin{bmatrix} 0 & -{\omega_e L_q} \\ {\omega_e L_d} & 0 \\ \end{bmatrix}}
+    {\begin{bmatrix} i_d \\ i_q \\ \end{bmatrix}}
++
+{\omega_e{\it\Psi_f}}
+{\begin{bmatrix} 0 \\ 1 \\ \end{bmatrix}} \\
+{\pmb{T}_{\text{2s-2r}}}
+{\begin{bmatrix} u_{\alpha} \\ u_{\beta} \end{bmatrix}}
+&=
+    {\begin{bmatrix} R_s & 0\\ 0 & R_s \end{bmatrix}}
+    {\pmb{T}_{\text{2s-2r}}} {\begin{bmatrix} i_{\alpha} \\ i_{\beta} \end{bmatrix}}
++p
+{\begin{Bmatrix*}
+{\begin{bmatrix} L_d & 0 \\ 0  & L_q \\ \end{bmatrix}}
+ {\pmb{T}_{\text{2s-2r}}} {\begin{bmatrix} i_{\alpha} \\ i_{\beta} \end{bmatrix}}
+\end{Bmatrix*}}
++
+{\begin{bmatrix} 0 & -{\omega_e L_q} \\ {\omega_e L_d} & 0 \\ \end{bmatrix}}
+    {\pmb{T}_{\text{2s-2r}}} {\begin{bmatrix} i_{\alpha} \\ i_{\beta} \end{bmatrix}}
++
+{\omega_e{\it\Psi_f}}
+{\begin{bmatrix} 0 \\ 1 \\ \end{bmatrix}} \\
+{\begin{bmatrix} u_{\alpha} \\ u_{\beta} \end{bmatrix}}
+&=
+    {\pmb{T}_{\text{2s-2r}}^{-1}}
+{\begin{bmatrix} R_s & 0\\ 0 & R_s \end{bmatrix}}
+    {\pmb{T}_{\text{2s-2r}}}
+{\begin{bmatrix} i_{\alpha} \\ i_{\beta} \end{bmatrix}}
++
+{\pmb{T}_{\text{2s-2r}}^{-1}}\; p
+{\begin{Bmatrix*}
+{\begin{bmatrix} L_d & 0 \\ 0  & L_q \\ \end{bmatrix}}
+ {\pmb{T}_{\text{2s-2r}}} {\begin{bmatrix} i_{\alpha} \\ i_{\beta} \end{bmatrix}}
+\end{Bmatrix*}} +
+{\pmb{T}_{\text{2s-2r}}^{-1}}\;
+{\begin{bmatrix} 0 & -{\omega_e L_q} \\ {\omega_e L_d} & 0 \\ \end{bmatrix}}
+    {\pmb{T}_{\text{2s-2r}}} {\begin{bmatrix} i_{\alpha} \\ i_{\beta} \end{bmatrix}}
++
+{\omega_e{\it\Psi_f}}\;
+{\pmb{T}_{\text{2s-2r}}^{-1}}
+{\begin{bmatrix} 0 \\ 1 \\ \end{bmatrix}} \\
+&=
+    {\begin{bmatrix} R_s & 0\\ 0 & R_s \end{bmatrix}}
+    {\begin{bmatrix} i_{\alpha} \\ i_{\beta} \end{bmatrix}}
++
+{\begin{Bmatrix*}
+?
+\end{Bmatrix*}}
++
+{\omega_e{\it\Psi_f}}
+{\begin{bmatrix*}[r] -\sin \theta_e \\ \cos \theta_e \\ \end{bmatrix*}} \\
+\end{aligned}
+$$</section><footer class=article-footer></footer><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css integrity=sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js integrity=sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8 crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js integrity=sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05 crossorigin=anonymous defer></script><script>window.addEventListener("DOMContentLoaded",()=>{const e=document.querySelector(".main-article");renderMathInElement(e,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],ignoredClasses:["gist"]})})</script></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/p/sensorless-control-based-on-eemf-observer/><div class=article-details><h2 class=article-title>Sensorless Control based on EEMF Observer</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
 2025 HE Qizheng</section><section class=powerby>学不可以已<br>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.30.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
 <button class="pswp__button pswp__button--share" title=Share></button>
 <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
