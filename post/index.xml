@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 奇正</title><link>https://kaysonho.github.io/post/</link><description>Recent content in Posts on 奇正</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>HE Qizheng</copyright><lastBuildDate>Sat, 03 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://kaysonho.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Sensorless Control based on EEMF Observer</title><link>https://kaysonho.github.io/p/sensorless-control-based-on-eemf-observer/</link><pubDate>Sat, 03 May 2025 00:00:00 +0000</pubDate><guid>https://kaysonho.github.io/p/sensorless-control-based-on-eemf-observer/</guid><description>&lt;h1 id="pmsm-model">PMSM model
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 奇正</title><link>https://kaysonho.github.io/post/</link><description>Recent content in Posts on 奇正</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>HE Qizheng</copyright><lastBuildDate>Sat, 03 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://kaysonho.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Sensorless Control based on EEMF Observer</title><link>https://kaysonho.github.io/p/sensorless-control-based-on-eemf-observer/</link><pubDate>Sat, 03 May 2025 00:00:00 +0000</pubDate><guid>https://kaysonho.github.io/p/sensorless-control-based-on-eemf-observer/</guid><description>&lt;h1 id="pmsm-eemf-model">PMSM EEMF Model
 &lt;/h1>&lt;h2 id="voltage-equation">Voltage Equation
-&lt;/h2>&lt;p>Rewritten the &lt;em>α-β&lt;/em> voltage equation,
+&lt;/h2>&lt;p>Define $(L_d-L_q)(\omega_e i_d -p i_q)+{\omega_e{\it\Psi_f}}$ as extended electromotive force, EEMF.&lt;br>
+Rewritten the &lt;em>α-β&lt;/em> voltage equation,
 &lt;/p>
 $$
 \begin{aligned}
@@ -22,13 +23,14 @@ $$
 &amp;=
 {\begin{bmatrix*}[r]
 R_s+p L_d &amp; -{\omega_e L_q} \\
-{\omega_e L_d} &amp; R_s+p L_q
+{\omega_e L_q} &amp; R_s+p L_d
 \end{bmatrix*}}
+{\begin{bmatrix} i_d \\ i_q \\ \end{bmatrix}}
 +
 {\begin{Bmatrix} (L_d-L_q)(\omega_e i_d -p i_q)+{\omega_e{\it\Psi_f}} \end{Bmatrix}}
 {\begin{bmatrix*}[r] 0 \\ 1 \\ \end{bmatrix*}}
 \end{aligned}
-$$&lt;p>Define $(L_d-L_q)(\omega_e i_d -p i_q)+{\omega_e{\it\Psi_f}}$ as extended electromotive force, EEMF.&lt;/p></description></item><item><title>PMSM Model</title><link>https://kaysonho.github.io/p/pmsm-model/</link><pubDate>Tue, 29 Apr 2025 00:00:00 +0000</pubDate><guid>https://kaysonho.github.io/p/pmsm-model/</guid><description>&lt;h1 id="pmsm-model">PMSM Model
+$$</description></item><item><title>PMSM Model</title><link>https://kaysonho.github.io/p/pmsm-model/</link><pubDate>Tue, 29 Apr 2025 00:00:00 +0000</pubDate><guid>https://kaysonho.github.io/p/pmsm-model/</guid><description>&lt;h1 id="pmsm-model">PMSM Model
 &lt;/h1>&lt;h2 id="transformation">Transformation
 &lt;/h2>&lt;h3 id="abc-to-α-β--3s-2s">&lt;em>abc&lt;/em> to &lt;em>α-β&lt;/em> / 3s-2s
 &lt;/h3>$$
@@ -138,7 +140,6 @@ M_{ca} &amp; M_{cc} &amp; L_{cc} \\
 \end{bmatrix*}}
 \end{aligned}
 $$&lt;h3 id="torque">Torque
-&lt;/h3>&lt;h3 id="voltage-1">Voltage
 &lt;/h3>&lt;h2 id="α-β">&lt;em>α-β&lt;/em>
 &lt;/h2>&lt;h3 id="a-b-c-to-α-β">&lt;em>a-b-c&lt;/em> to &lt;em>α-β&lt;/em>
 &lt;/h3>$$
@@ -264,19 +265,8 @@ p M_{\beta\alpha} &amp; R_s +pL_{\beta\beta}
 -\sin\theta_e \\
 \cos\theta_e \\
 \end{bmatrix*}} \\
-&amp;=
-{\begin{bmatrix*}[c]
-R_s+p L_d &amp; \omega_e (L_d-L_q)\\
--\omega_e (L_d-L_q) &amp; R_s +pL_d
-\end{bmatrix*}}
-{\begin{bmatrix} i_{\alpha} \\ i_{\beta} \\ \end{bmatrix}}
-+
-{\begin{Bmatrix} (L_d-L_q)(\omega_e i_d -p i_q)+{\omega_e{\it\Psi_f}} \end{Bmatrix}}
-{\begin{bmatrix*}[r] -\sin\theta_e \\ \cos\theta_e \\ \end{bmatrix*}}
 \end{aligned}
-$$&lt;p>
-Define $(L_d-L_q)(\omega_e i_d -p i_q)+{\omega_e{\it\Psi_f}}$ as extended electromotive force, EEMF.&lt;/p>
-&lt;h3 id="α-β-flux-leakage">&lt;em>α-β&lt;/em> Flux Leakage
+$$&lt;h3 id="α-β-flux-leakage">&lt;em>α-β&lt;/em> Flux Leakage
 &lt;/h3>$$
 \begin{aligned}
 {\pmb{\it{\Psi_{\alpha\beta}}}}={\pmb{L_{\alpha\beta} i_{\alpha\beta}}}+{\pmb{\it{\Psi_{f\alpha\beta}}}}
@@ -392,8 +382,7 @@ $$$$
 &amp;{\pmb{T}_{\text{2s-2r}}}
 {\begin{bmatrix} R_s &amp; 0\\ 0 &amp; R_s \end{bmatrix}}
 {\pmb{T}_{\text{2s-2r}}^{-1}} =
-{\begin{bmatrix} R_s &amp; 0\\ 0 &amp; R_s \end{bmatrix}}
-{\pmb{T}_{\text{2s-2r}}^{-1}} \\
+{\begin{bmatrix} R_s &amp; 0\\ 0 &amp; R_s \end{bmatrix}}\\
 &amp;{\pmb{T}_{\text{2s-2r}}} \;p
 {\begin{Bmatrix}
 {{\begin{bmatrix}
@@ -406,7 +395,8 @@ M_{\beta\alpha} &amp; L_{\beta\beta} \\
 \cos\theta_e \\
 \sin\theta_e \\
 \end{bmatrix*}}
-\end{Bmatrix}} \\ &amp;= p
+\end{Bmatrix}}
+\\ &amp;= p
 {\begin{Bmatrix}
 {\pmb{T}_{\text{2s-2r}}}
 {{\begin{bmatrix}
@@ -432,23 +422,37 @@ M_{\beta\alpha} &amp; L_{\beta\beta} \\
 \cos\theta_e \\
 \sin\theta_e \\
 \end{bmatrix*}}
-\end{Bmatrix}} \\ &amp;= p
+\end{Bmatrix}}
+\\
+\\
+&amp;{\pmb{T}_{\text{2s-2r}}}
+{{\begin{bmatrix}
+L_{\alpha\alpha} &amp; M_{\alpha\beta} \\
+M_{\beta\alpha} &amp; L_{\beta\beta} \\
+\end{bmatrix}}}
+{\pmb{T}_{\text{2s-2r}}^{-1}}
+=
 {\begin{bmatrix*}[c]
 L_{s0}+M_{s0}+3/2\;L_{s2} &amp; 0 \\
 0 &amp; L_{s0}+M_{s0}-3/2\;L_{s2} \\
 \end{bmatrix*}}
-{\begin{bmatrix} i_d \\ i_q \\ \end{bmatrix}}\\ &amp;-
+\\
+&amp;(p\;{\pmb{T}_{\text{2s-2r}}})
+{{\begin{bmatrix}
+L_{\alpha\alpha} &amp; M_{\alpha\beta} \\
+M_{\beta\alpha} &amp; L_{\beta\beta} \\
+\end{bmatrix}}}
+{\pmb{T}_{\text{2s-2r}}^{-1}}
+=
 {\begin{bmatrix}
 0 &amp; \omega_e(L_{s0}+M_{s0}-3/2\;L_{s2}) \\
 -\omega_e(L_{s0}+M_{s0}+3/2\;L_{s2}) &amp; 0 \\
-\end{bmatrix}}
-{\begin{bmatrix} i_d \\ i_q \\ \end{bmatrix}} - {\omega_e{\it\Psi_f}}
-{\begin{bmatrix} 0 \\ -1 \\ \end{bmatrix}} \\ &amp;= p
-{\begin{bmatrix} L_d &amp; 0 \\ 0 &amp; L_q \\ \end{bmatrix}}
-{\begin{bmatrix} i_d \\ i_q \\ \end{bmatrix}} +
-{\begin{bmatrix} 0 &amp; -{\omega_e L_q} \\ {\omega_e L_d} &amp; 0 \\ \end{bmatrix}}
-{\begin{bmatrix} i_d \\ i_q \\ \end{bmatrix}} + {\omega_e{\it\Psi_f}}
-{\begin{bmatrix} 0 \\ 1 \\ \end{bmatrix}}
+\end{bmatrix}}\\
+&amp;(p\;{\pmb{T}_{\text{2s-2r}}})
+{\begin{bmatrix*}[l]
+\cos\theta_e \\
+\sin\theta_e \\
+\end{bmatrix*}} = {\omega_e}{\begin{bmatrix} 0 \\ -1 \\ \end{bmatrix}}
 \end{aligned}
 $$&lt;h3 id="d-q-voltage">&lt;em>d-q&lt;/em> Voltage
 &lt;/h3>$$
@@ -483,8 +487,9 @@ $$$$
 R_s+p L_d &amp; -{\omega_e L_q} \\
 {\omega_e L_d} &amp; R_s+p L_q
 \end{bmatrix*}}
+{\begin{bmatrix} i_d \\ i_q \\ \end{bmatrix}}
 +
-{\begin{Bmatrix} (L_d-L_q)(\omega_e i_d -p i_q)+{\omega_e{\it\Psi_f}} \end{Bmatrix}}
+{\omega_e{\it\Psi_f}}
 {\begin{bmatrix*}[r] 0 \\ 1 \\ \end{bmatrix*}}
 \end{aligned}
 $$&lt;h3 id="d-q-flux-leakage">&lt;em>d-q&lt;/em> Flux Leakage
@@ -529,68 +534,6 @@ $$$$
 \begin{aligned}
 T_e = \underbrace{3/2\; p_n (L_d-L_q)i_d i_q}_{\text{Reluctance torque}}
 +\underbrace{3/2\; p_n \it\Psi_f i_q}_{\text{Magnet torque}}
-\end{aligned}
-$$&lt;h3 id="rewritten-α-β-voltage">rewritten &lt;em>α-β&lt;/em> voltage
-&lt;/h3>$$
-\begin{aligned}
-{\begin{bmatrix} u_d \\ u_q \end{bmatrix}}
-&amp;=
-{\begin{bmatrix} R_s &amp; 0\\ 0 &amp; R_s \end{bmatrix}}
-{\begin{bmatrix} i_d \\ i_q \\ \end{bmatrix}}
-+p
-{\begin{bmatrix} L_d &amp; 0 \\ 0 &amp; L_q \\ \end{bmatrix}}
-{\begin{bmatrix} i_d \\ i_q \\ \end{bmatrix}}
-+
-{\begin{bmatrix} 0 &amp; -{\omega_e L_q} \\ {\omega_e L_d} &amp; 0 \\ \end{bmatrix}}
-{\begin{bmatrix} i_d \\ i_q \\ \end{bmatrix}}
-+
-{\omega_e{\it\Psi_f}}
-{\begin{bmatrix} 0 \\ 1 \\ \end{bmatrix}} \\
-{\pmb{T}_{\text{2s-2r}}}
-{\begin{bmatrix} u_{\alpha} \\ u_{\beta} \end{bmatrix}}
-&amp;=
-{\begin{bmatrix} R_s &amp; 0\\ 0 &amp; R_s \end{bmatrix}}
-{\pmb{T}_{\text{2s-2r}}} {\begin{bmatrix} i_{\alpha} \\ i_{\beta} \end{bmatrix}}
-+p
-{\begin{Bmatrix*}
-{\begin{bmatrix} L_d &amp; 0 \\ 0 &amp; L_q \\ \end{bmatrix}}
-{\pmb{T}_{\text{2s-2r}}} {\begin{bmatrix} i_{\alpha} \\ i_{\beta} \end{bmatrix}}
-\end{Bmatrix*}}
-+
-{\begin{bmatrix} 0 &amp; -{\omega_e L_q} \\ {\omega_e L_d} &amp; 0 \\ \end{bmatrix}}
-{\pmb{T}_{\text{2s-2r}}} {\begin{bmatrix} i_{\alpha} \\ i_{\beta} \end{bmatrix}}
-+
-{\omega_e{\it\Psi_f}}
-{\begin{bmatrix} 0 \\ 1 \\ \end{bmatrix}} \\
-{\begin{bmatrix} u_{\alpha} \\ u_{\beta} \end{bmatrix}}
-&amp;=
-{\pmb{T}_{\text{2s-2r}}^{-1}}
-{\begin{bmatrix} R_s &amp; 0\\ 0 &amp; R_s \end{bmatrix}}
-{\pmb{T}_{\text{2s-2r}}}
-{\begin{bmatrix} i_{\alpha} \\ i_{\beta} \end{bmatrix}}
-+
-{\pmb{T}_{\text{2s-2r}}^{-1}}\; p
-{\begin{Bmatrix*}
-{\begin{bmatrix} L_d &amp; 0 \\ 0 &amp; L_q \\ \end{bmatrix}}
-{\pmb{T}_{\text{2s-2r}}} {\begin{bmatrix} i_{\alpha} \\ i_{\beta} \end{bmatrix}}
-\end{Bmatrix*}} +
-{\pmb{T}_{\text{2s-2r}}^{-1}}\;
-{\begin{bmatrix} 0 &amp; -{\omega_e L_q} \\ {\omega_e L_d} &amp; 0 \\ \end{bmatrix}}
-{\pmb{T}_{\text{2s-2r}}} {\begin{bmatrix} i_{\alpha} \\ i_{\beta} \end{bmatrix}}
-+
-{\omega_e{\it\Psi_f}}\;
-{\pmb{T}_{\text{2s-2r}}^{-1}}
-{\begin{bmatrix} 0 \\ 1 \\ \end{bmatrix}} \\
-&amp;=
-{\begin{bmatrix} R_s &amp; 0\\ 0 &amp; R_s \end{bmatrix}}
-{\begin{bmatrix} i_{\alpha} \\ i_{\beta} \end{bmatrix}}
-+
-{\begin{Bmatrix*}
-?
-\end{Bmatrix*}}
-+
-{\omega_e{\it\Psi_f}}
-{\begin{bmatrix*}[r] -\sin \theta_e \\ \cos \theta_e \\ \end{bmatrix*}} \\
 \end{aligned}
 $$</description></item><item><title>Markdown Syntax Guide</title><link>https://kaysonho.github.io/p/markdown-syntax-guide/</link><pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate><guid>https://kaysonho.github.io/p/markdown-syntax-guide/</guid><description>&lt;img src="https://kaysonho.github.io/p/markdown-syntax-guide/pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg" alt="Featured image of post Markdown Syntax Guide" />&lt;p>This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p>
 &lt;h2 id="headings">Headings
