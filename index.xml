@@ -140,7 +140,20 @@ M_{ca} &amp; M_{cc} &amp; L_{cc} \\
 \end{bmatrix*}}
 \end{aligned}
 $$&lt;h3 id="torque">Torque
-&lt;/h3>&lt;h2 id="α-β">&lt;em>α-β&lt;/em>
+&lt;/h3>$$
+\begin{aligned}
+T_e=\frac{P_e}{\omega_m}
+\end{aligned}
+$$&lt;h3 id="mechanical-motion">Mechanical motion
+&lt;/h3>$$
+\begin{aligned}
+J \frac{d\omega_m}{dt}&amp;=T_e-T_L-B \omega_m \\
+\end{aligned}
+$$$$
+\begin{aligned}
+\omega_e =p_n \omega_m
+\end{aligned}
+$$&lt;h2 id="α-β">&lt;em>α-β&lt;/em>
 &lt;/h2>&lt;h3 id="a-b-c-to-α-β">&lt;em>a-b-c&lt;/em> to &lt;em>α-β&lt;/em>
 &lt;/h3>$$
 \begin{aligned}
