@@ -1,4 +1,49 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MOTOR on 奇正</title><link>https://kaysonho.github.io/categories/motor/</link><description>Recent content in MOTOR on 奇正</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>HE Qizheng</copyright><lastBuildDate>Sat, 03 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://kaysonho.github.io/categories/motor/index.xml" rel="self" type="application/rss+xml"/><item><title>Sensorless Control based on EEMF Observer</title><link>https://kaysonho.github.io/p/sensorless-control-based-on-eemf-observer/</link><pubDate>Sat, 03 May 2025 00:00:00 +0000</pubDate><guid>https://kaysonho.github.io/p/sensorless-control-based-on-eemf-observer/</guid><description>&lt;h1 id="pmsm-eemf-model">PMSM EEMF Model
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MOTOR on 奇正</title><link>https://kaysonho.github.io/categories/motor/</link><description>Recent content in MOTOR on 奇正</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>HE Qizheng</copyright><lastBuildDate>Sat, 03 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://kaysonho.github.io/categories/motor/index.xml" rel="self" type="application/rss+xml"/><item><title>Field-Weakening Control</title><link>https://kaysonho.github.io/p/field-weakening-control/</link><pubDate>Sat, 03 May 2025 00:00:00 +0000</pubDate><guid>https://kaysonho.github.io/p/field-weakening-control/</guid><description>&lt;p>Voltage
+&lt;/p>
+$$
+\begin{aligned}
+u_d &amp;= (R_s + p L_d )i_d - {\omega_e L_q} i_q \\
+u_q &amp;= (R_s + p L_q )i_q + {\omega_e L_d} i_d + \omega_e {\it\Psi_f}
+\end{aligned}
+$$&lt;p>Torque
+&lt;/p>
+$$
+\begin{aligned}
+T_e &amp;= \frac{3}{2}\; p_n[(L_d-L_q)i_d i_q + {\it\Psi_f} i_q]
+\end{aligned}
+$$&lt;p>Current limit condition
+电流极限环
+&lt;/p>
+$$
+\begin{aligned}
+i_d^2+i_q^2 \le I_{max}^2
+\end{aligned}
+$$&lt;p>Voltage limit condition
+电压极限环
+&lt;/p>
+$$
+\begin{aligned}
+u_d^2 + u_q^2 \le U_{max}^2
+\end{aligned}
+$$$$
+\begin{aligned}
+(\omega_e L_q i_q)^2+(\omega_e L_d i_d + \omega_e {\it\Psi_f})^2 &amp;\le U_{max}^2
+\end{aligned}
+$$&lt;h1 id="field-weakening">Field-weakening
+&lt;/h1>&lt;h1 id="reference">Reference
+&lt;/h1>&lt;p>[1] &lt;a class="link" href="https://www.mathworks.com/help/mcb/ug/pmsm-characteristics-constraint-curves.html" target="_blank" rel="noopener"
+>Matlab PMSM Drive Characteristics and Constraint Curves&lt;/a>
+[2] &lt;a class="link" href="https://www.mathworks.com/discovery/field-weakening-control.html" target="_blank" rel="noopener"
+>Matlab Field-Weakening Control&lt;/a>&lt;/p></description></item><item><title>Position Observer</title><link>https://kaysonho.github.io/p/position-observer/</link><pubDate>Sat, 03 May 2025 00:00:00 +0000</pubDate><guid>https://kaysonho.github.io/p/position-observer/</guid><description>&lt;h1 id="back-emf-observer">Back-EMF Observer
+&lt;/h1>&lt;p>Back-EMF observer based on &lt;em>R&lt;/em>&amp;amp;&lt;em>L&lt;/em> Modeling&lt;/p>
+&lt;p>&lt;em>d-q&lt;/em> Voltage
+&lt;/p>
+$$
+\begin{aligned}
+u_d &amp;= (R_s + p L_d )i_d - {\omega_e L_q} i_q \\
+u_q &amp;= (R_s + p L_q )i_q + {\omega_e L_d} i_d + e_q \\
+\end{aligned}
+$$&lt;p>Back-EMF $e_q = \omega_e {\it\Psi_f}$&lt;/p></description></item><item><title>Sensorless Control based on EEMF Observer</title><link>https://kaysonho.github.io/p/sensorless-control-based-on-eemf-observer/</link><pubDate>Sat, 03 May 2025 00:00:00 +0000</pubDate><guid>https://kaysonho.github.io/p/sensorless-control-based-on-eemf-observer/</guid><description>&lt;h1 id="pmsm-eemf-model">PMSM EEMF Model
 &lt;/h1>&lt;h2 id="voltage-equation">Voltage Equation
 &lt;/h2>&lt;p>Define $(L_d-L_q)(\omega_e i_d -p i_q)+{\omega_e{\it\Psi_f}}$ as extended electromotive force, EEMF.&lt;br>
 Rewritten the &lt;em>α-β&lt;/em> voltage equation,
